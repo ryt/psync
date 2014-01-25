@@ -11,7 +11,7 @@ Basic usage:
 
 """
 __author__  = 'Ray, github.com/ryt'
-__version__ = 'psync 0.1'
+__version__ = 'psync version 0.1'
 __license__ = 'MIT'
 
 from argparse import ArgumentParser
@@ -36,6 +36,7 @@ def main():
   parser.add_argument('-o', help='override new files on the reciever, rsync !u', action='store_true')
   parser.add_argument('-d', help='delete extra files on destination, rsync --delete', action='store_true')
   parser.add_argument('-s', help='show the rsync command used and exit', action='store_true')
+  parser.add_argument('-v', '--version', action='store_true')
   args = parser.parse_args()
   
   if args.list:
@@ -47,6 +48,8 @@ def main():
       print 'No apps yet, go add some!'
   elif args.app:
     app_run(args)
+  elif args.version:
+    print __version__
   else:
     print 'Specify an app name, or to get a list use -l or --list'
       
