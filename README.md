@@ -7,7 +7,7 @@ Give each app a short name and you're done.
 
 Setup
 ==
-> In the examples below, the command used is psync. You should link /bin/psync to psync.py if you want to do that. If you don't know how, read to the end.
+> In the examples below, the command used is psync. You can create an alias if you want to do that. If you don't know how, read to the end.
 
 Add your local and remote paths by editing psync.py:
 
@@ -39,9 +39,8 @@ The output should be something like this:
     myfile      /home/myfile.php    user@1.1.1.1:/home/myfile.php
     railsapp    /home/me/railsapp/  user@remote.com:/home/railsapp/
 
-To acess psync.py with psync:
+To acess psync.py with psync add the following to `.bashrc` or `.profile` on Mac:
 
-    ln -s /path/to/psync.py /bin/psync
-    chmod +x psync
+    alias psync='/path/to/psync.py'
 
 > Currently you can't specify additional rsync options when you run psync. Also, everything is stored in one file. If both of these things bother you, feel free to edit the script and make yourself happy.
