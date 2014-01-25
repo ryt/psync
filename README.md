@@ -1,6 +1,6 @@
 Psync
 ==
-> Psync makes it easy to use rsync with multiple apps/sites. 
+Psync (inspired by grsync) makes it easy to use rsync with multiple apps/sites. 
 
 Just edit psync.py and add your source and destination paths. 
 Give each app a short name and you're done.
