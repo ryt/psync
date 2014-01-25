@@ -11,8 +11,10 @@ Setup
 
 Add your local and remote paths by editing psync.py:
 
-    a['railsapp'] = ['/home/me/railsapp/', 'user@remote.com:/home/railsapp/']
-    
+```python
+a['railsapp'] = ['/home/me/railsapp/', 'user@remote.com:/home/railsapp/']
+```
+
 If both your local and remote paths are identical:
 
     a['myfile'] = ['/home/myfile.php', 'user@1.1.1.1:same']
