@@ -64,8 +64,8 @@ def app_run(args):
     cmd = ['rsync', opt, dir1, dir2 ]
     if args.d:
       cmd = ['rsync', opt, '--delete', dir1, dir2]
-      print ' '.join(cmd)
     if args.s:
+      print ' '.join(cmd)
       exit()
     call(cmd)
   else:
