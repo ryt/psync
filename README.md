@@ -24,14 +24,18 @@ a['myapp']  = ['/home/myapp/',      'server1:same']
 
 Usage
 ==
-Normal sync:
+Normal sync (-a):
 
-    psync -a railsapp
-    psync -a myfile
-
+    psync railsapp
+    psync myfile
+    
 Sync but delete extraneous files (-d):
 
-    psync -da railsapp
+    psync -d railsapp
+    
+Show the rsync command and exit (-s):
+
+    psync -s railsapp
 
 List all the apps (or files) that you've added:
 

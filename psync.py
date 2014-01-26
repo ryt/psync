@@ -4,14 +4,14 @@
 Manage multiple apps/sites with rsync
 
 Basic usage:
-    psync  -a appname
-    psync -sa appname
-    psync -da appname
+    psync    appname
+    psync -s appname
+    psync -d appname
     psync -l
 
 """
 __author__  = 'Ray, github.com/ryt'
-__version__ = 'psync version 0.1'
+__version__ = 'psync version 0.1.1'
 __license__ = 'MIT'
 
 from argparse import ArgumentParser
@@ -31,12 +31,13 @@ a['file3'] = ['/home/user/file3.py', 'user@host:same']
 apps = OrderedDict(sorted(a.items()))
   
 def main():
-  parser.add_argument('-a', '--app', help='start syncing with app name', metavar='app', default=False, nargs='?', const='empty')
+  parser.add_argument('-a', '--app', help='start syncing with app name', metavar='appname', default=False, nargs='?', const='empty')
   parser.add_argument('-l', '--list', help='list all apps and directories', action='store_true')
   parser.add_argument('-o', help='override new files on the reciever, rsync !u', action='store_true')
   parser.add_argument('-d', help='delete extra files on destination, rsync --delete', action='store_true')
   parser.add_argument('-s', help='show the rsync command used and exit', action='store_true')
-  parser.add_argument('-v', '--version', action='store_true')
+  parser.add_argument('-v', '--version')
+  parser.add_argument('aname', nargs='?', metavar='appname', help='start syncing with app name (-a)')
   args = parser.parse_args()
   
   if args.list:
@@ -46,7 +47,7 @@ def main():
       print ''
     else:
       print 'No apps yet, go add some!'
-  elif args.app:
+  elif args.app or args.aname:
     app_run(args)
   elif args.version:
     print __version__
@@ -54,7 +55,7 @@ def main():
     print 'Specify an app name, or to get a list use -l or --list'
       
 def app_run(args):
-  name = args.app
+  name = args.app or args.aname
   if name in apps:
     dir1 = apps[name][0]
     dir2 = samef(apps[name])
