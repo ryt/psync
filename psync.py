@@ -1,25 +1,10 @@
 #!/usr/bin/env python
 
-"""
-Manage multiple apps/sites with rsync
-
-Basic usage:
-    psync    appname
-    psync -s appname
-    psync -d appname
-    psync -l
-
-"""
 __author__  = 'Ray, github.com/ryt'
-__version__ = 'psync version 0.1.1'
+__version__ = 'psync version 0.1.2'
 __license__ = 'MIT'
 
-from argparse import ArgumentParser
-from collections import OrderedDict
-from subprocess import call
 
-
-parser = ArgumentParser(description='Simple rsync interface.')
 a = {}
 
 # if you want to, you can create a separate file to store your list but this is a more compact solution
@@ -28,6 +13,13 @@ a['app1'] = ['/home/user/app1/', 'user@server1:/home/user/app1/']
 a['site2'] = ['/home/user/site2/', 'server2:same'] # :same means destination_path == source_path (server2:/home/user/site2/)
 a['file3'] = ['/home/user/file3.py', 'user@host:same']
 
+
+
+from argparse import ArgumentParser
+from collections import OrderedDict
+from subprocess import call
+
+parser = ArgumentParser(description='A simple python wrapper to manage rsync.')
 apps = OrderedDict(sorted(a.items()))
   
 def main():
@@ -36,7 +28,7 @@ def main():
   parser.add_argument('-o', help='override new files on the reciever, rsync !u', action='store_true')
   parser.add_argument('-d', help='delete extra files on destination, rsync --delete', action='store_true')
   parser.add_argument('-s', help='show the rsync command used and exit', action='store_true')
-  parser.add_argument('-v', '--version')
+  parser.add_argument('-v', '--version', action='store_true')
   parser.add_argument('aname', nargs='?', metavar='appname', help='start syncing with app name (-a)')
   args = parser.parse_args()
   
