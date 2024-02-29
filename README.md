@@ -2,24 +2,31 @@ Psync
 ==
 Psync (inspired by grsync) makes it easy to use rsync with multiple apps/sites. 
 
-Just edit psync.py and add your source and destination paths. 
-Give each app a short name and you're done.
+Just edit `psync_list.ini` and add your local and remote paths. 
+Name each section with your app or project's name and you're done.
 
 Setup
 ==
-> In the examples below, the command used is psync. You can create an alias if you want to do that. If you don't know how, read to the end.
+> In the examples below, the command used is psync. You can create an alias, for example `push`, if you want to do that. If you don't know how, read to the end.
 
-Add your local and remote paths by editing psync.py:
+Add your local and remote paths by editing `psync_list.ini`:
 
-```python
-a['railsapp'] = ['/home/me/railsapp/', 'user@remote.com:/home/railsapp/']
+```ini
+[railsap]
+local = /home/me/railsapp/
+remote = user@remote.com:/home/railsapp/
 ```
 
-If both your local and remote paths are identical:
+If both your local and remote paths are identical, use the keyword `:same` in the remote value:
 
-```python
-a['myfile'] = ['/home/myfile.php',  'user@1.1.1.1:same']
-a['myapp']  = ['/home/myapp/',      'server1:same']
+```ini
+[myfile]
+local = /home/myfile.php
+remote = user@1.1.1.1:same
+
+[myapp]
+local = /home/myapp/
+remote = serverhost:same
 ```
 
 Usage
@@ -33,22 +40,28 @@ Sync but delete extraneous files (-d):
 
     psync -d railsapp
     
-Show the rsync command and exit (-s):
+Show the rsync command and exit (-s) or (-c):
 
     psync -s railsapp
+    psync -c railsapp
 
-List all the apps (or files) that you've added:
+List all the apps (or files) that you've added (-l) or (--list):
 
     psync -l
+    psync --list
     
 The output should be something like this:
     
-    myapp       /home/myapp/        server1:/home/myapp/
+    myapp       /home/myapp/        serverhost:/home/myapp/
     myfile      /home/myfile.php    user@1.1.1.1:/home/myfile.php
     railsapp    /home/me/railsapp/  user@remote.com:/home/railsapp/
 
-To acess psync.py with psync add the following to `.bashrc` or `.profile` on Mac:
+To acess psync.py with `psync` add the following to `.bashrc` or `.profile` on Mac:
 
     alias psync='/path/to/psync.py'
 
-> Currently you can't specify additional rsync options when you run psync. Also, everything is stored in one file. If both of these things bother you, feel free to edit the script and make yourself happy.
+To access it with `push` simply name the key 'push' :)
+
+    alias push='/path/to/psync.py'
+
+> Final note: if you want to specify additional rsync options when you run psync, run the show command and exit with (-s) or (-c) and add your options accordingly when running the rsync command.
