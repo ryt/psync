@@ -23,7 +23,7 @@ If both your local and remote paths are identical, use the keyword `:same` in th
 myfile = /home/myfile.php   user@1.1.1.1:same
 myapp  = /home/myapp/       serverhost:same
 ```
-You can escape spaces in path names using a backslash (e.g. `my\ file`). Additionally, the conf file has a settings section where you can specify paths you'd like to exclude. The default settings will exclude `.git/` and `.DS_Store`.
+> You can escape spaces in path names using a backslash (e.g. `my\ file`). Additionally, the conf file has a settings section where you can specify paths you'd like to exclude. The default settings will exclude `.git/` and `.DS_Store`.
 
 Usage
 ==
