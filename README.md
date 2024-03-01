@@ -2,32 +2,28 @@ Psync
 ==
 Psync (inspired by grsync) makes it easy to use rsync with multiple apps/sites. 
 
-Just edit `psync_list.ini` and add your local and remote paths. 
-Name each section with your app or project's name and you're done.
+Just edit `list.psync.conf` and add your local and remote paths. 
+Give each app or project a short name and you're done.
 
 Setup
 ==
 > In the examples below, the command used is psync. You can create an alias, for example `push`, if you want to do that. If you don't know how, read to the end.
 
-Add your local and remote paths by editing `psync_list.ini`:
+Add your local and remote paths by editing `list.psync.conf`:
 
 ```ini
-[railsap]
-local = /home/me/railsapp/
-remote = user@remote.com:/home/railsapp/
+[list]
+railsapp = /home/me/railsapp/    user@remote.com:/home/railsapp/
 ```
 
 If both your local and remote paths are identical, use the keyword `:same` in the remote value:
 
 ```ini
-[myfile]
-local = /home/myfile.php
-remote = user@1.1.1.1:same
-
-[myapp]
-local = /home/myapp/
-remote = serverhost:same
+[list]
+myfile = /home/myfile.php   user@1.1.1.1:same
+myapp  = /home/myapp/       serverhost:same
 ```
+You can escape spaces in path names using a backslash (e.g. `my\ file`). Additionally, the conf file has a settings section where you can specify paths you'd like to exclude. The default settings will exclude `.git/` and `.DS_Store`.
 
 Usage
 ==
