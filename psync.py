@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 __author__  = 'Ray, github.com/ryt'
-__version__ = 'psync version 1.0.0'
+__version__ = 'psync version 1.0.1'
 __license__ = 'MIT'
 
 import sys
@@ -12,22 +12,34 @@ from subprocess import call
 
 parser = ArgumentParser(description='A simple python wrapper to manage rsync.')
 
-# import list of apps/projects from ini file
+# path of the conf file
+conf = 'list.psync.conf'
 
 plist = ConfigParser()
-plist.read('psync_list.ini')
+plist.read(conf)
 
-# global additional rsync options
-# - exclude ".git/" directories
-# - to override, use the (-s) or (-c) option and run rsync directly
-
-eopt = '--exclude=".git/"'
 
 a = {}
-for sec_name in plist.sections():
-  a[sec_name] = [plist.get(sec_name, 'local'), plist.get(sec_name, 'remote')]
+for key, val in plist.items('list'):
+  vals = val.replace("\\ ", "%20")
+  vals = ' '.join(vals.split()).split(' ')
+  vals = [v.replace("%20", ' ') for v in vals]
+  a[key] = [vals[0], vals[1]]
 
 apps = OrderedDict(sorted(a.items()))
+
+
+# global additional rsync options
+# - excludes .git/ & .DS_Store by default, add more to the conf file
+# - to override, edit the conf file, or use the (-s) or (-c) option and run rsync directly
+
+eopt = ''
+setexcl = plist.get('settings', 'exclude')
+if setexcl:
+  paths = setexcl.replace("\\ ", "%20")
+  paths = ' '.join(paths.split()).split(' ')
+  paths = [p.replace("%20", ' ') for p in paths]
+  eopt = ' '.join(['--exclude=' + p for p in paths])
 
 def main():
   parser.add_argument('-a', '--app', help='start syncing with app name', metavar='appname', default=False, nargs='?', const='empty')
