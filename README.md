@@ -56,7 +56,7 @@ To acess psync.py with `psync` add the following to `.bashrc` or `.profile` on M
 
     alias psync='/path/to/psync.py'
 
-To access it with `push` simply name the key 'push' :)
+To access it with `push` simply name the alias `push` :)
 
     alias push='/path/to/psync.py'
 
