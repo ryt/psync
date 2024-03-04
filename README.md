@@ -2,7 +2,7 @@ Psync
 ==
 Psync (inspired by grsync) makes it easy to use rsync with multiple apps/sites. 
 
-Just edit `psync.conf` and add your local and remote paths. 
+Just edit `psync.ini` and add your local and remote paths. 
 Give each app or project a short name and you're done.
 
 Setup
