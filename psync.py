@@ -13,7 +13,7 @@ from subprocess import call
 parser = ArgumentParser(description='A simple python wrapper to manage rsync.')
 
 # path of the conf file
-conf = 'psync.conf'
+conf = 'psync.ini'
 
 plist = ConfigParser()
 plist.read(conf)
