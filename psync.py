@@ -74,9 +74,9 @@ def app_run(args):
     opt = '-rtpvu' if sys.platform == 'darwin' else '-rtpvus'
     if args.o:
       opt = '-rtpv' if sys.platform == 'darwin' else '-rtpvs'
-    cmd = ['rsync', opt, dir1, dir2, eopt ]
+    cmd = ['rsync', opt, eopt, dir1, dir2]
     if args.d:
-      cmd = ['rsync', opt, '--delete', dir1, dir2, eopt]
+      cmd = ['rsync', opt, '--delete', eopt, dir1, dir2]
     if args.s or args.c:
       print ' '.join(cmd)
       exit()
