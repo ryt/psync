@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 __author__  = 'Ray, github.com/ryt'
-__version__ = 'psync version 1.0.1'
+__version__ = 'psync version 1.0.2'
 __license__ = 'MIT'
 
 import sys
