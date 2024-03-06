@@ -34,10 +34,15 @@ Normal sync (-a):
 
 Specify a custom file path for config file:
 
-    psync     -f /path/to/psync.ini
+    psync -f /path/to/psync.ini
+    
+or
+    
     psync --conf=/path/to/psync.ini
 
-> By default, the config file is located in the same directory as `psync.py`. You can set the config path through the above option or by editing the code. The latter option isn't reccomended however. You can set the custom file path in your alias (e.g. `push`) to use the shorter command in your normal workflow. Read the **Alias** section at the end for details.
+> By default, the script will look for the config file in your current working directory. You can set a different config path through the above option or by editing the code. The latter option isn't reccomended.
+> 
+> Additionally, you can set the custom file path if you create an alias (e.g. `push`) to use the shorter command in your normal workflow. Read the **Alias** section at the end for more details.
 
 
 Sync but delete extraneous files (-d):
@@ -69,8 +74,10 @@ To acess psync.py with `psync` add the following to `.bashrc` or `.profile` on M
 To access it with `push` simply name the alias `push` :)
 
     alias push='/path/to/psync.py'
+
+> Note: you may encounter errors if you use the short `~/path` versions of files or directories in your alias. To prevent any errors, use the full path starting with `/path`.
     
-To specify a custom config path with `push` use the `-f` or `--conf` option:
+To specify a custom config file path with `push` use the `-f` or `--conf` option:
 
     alias push='/path/to/psync.py --conf=/path/to/psync.ini'
 
