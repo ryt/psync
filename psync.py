@@ -11,47 +11,28 @@ from collections import OrderedDict
 from subprocess import call
 
 parser = ArgumentParser(description='A simple python wrapper to manage rsync.')
+parser.add_argument('-a', '--app', help='start syncing with app name', metavar='appname', default=False, nargs='?', const='empty')
+parser.add_argument('-l', '--list', help='list all apps and directories', action='store_true')
+parser.add_argument('-o', help='override new files on the reciever, rsync !u', action='store_true')
+parser.add_argument('-d', help='delete extra files on destination, rsync --delete', action='store_true')
+parser.add_argument('-s', help='show the rsync command used and exit', action='store_true')
+parser.add_argument('-c', help='show the rsync command used and exit', action='store_true')
+parser.add_argument('-v', '--version', action='store_true')
+parser.add_argument('aname', nargs='?', metavar='appname', help='start syncing with app name (-a)')
+parser.add_argument('-f', '--conf', help='set the path of the config file with list of apps')
+args = parser.parse_args()
 
-# path of the conf file
+
+# default path of the conf file
+
 conf = 'psync.ini'
 
-plist = ConfigParser()
-plist.read(conf)
+# if a custom path is set (-f, --conf), use that path instead
 
-
-a = {}
-for key, val in plist.items('list'):
-  vals = val.replace("\\ ", "%20")
-  vals = ' '.join(vals.split()).split(' ')
-  vals = [v.replace("%20", ' ') for v in vals]
-  a[key] = [vals[0], vals[1]]
-
-apps = OrderedDict(sorted(a.items()))
-
-
-# global additional rsync options
-# - excludes .git/ & .DS_Store by default, add more to the conf file
-# - to override, edit the conf file, or use the (-s) or (-c) option and run rsync directly
-
-eopt = ''
-setexcl = plist.get('settings', 'exclude')
-if setexcl:
-  paths = setexcl.replace("\\ ", "%20")
-  paths = ' '.join(paths.split()).split(' ')
-  paths = [p.replace("%20", ' ') for p in paths]
-  eopt = ' '.join(['--exclude=' + p for p in paths])
+if args.conf:
+  conf = args.conf
 
 def main():
-  parser.add_argument('-a', '--app', help='start syncing with app name', metavar='appname', default=False, nargs='?', const='empty')
-  parser.add_argument('-l', '--list', help='list all apps and directories', action='store_true')
-  parser.add_argument('-o', help='override new files on the reciever, rsync !u', action='store_true')
-  parser.add_argument('-d', help='delete extra files on destination, rsync --delete', action='store_true')
-  parser.add_argument('-s', help='show the rsync command used and exit', action='store_true')
-  parser.add_argument('-c', help='show the rsync command used and exit', action='store_true')
-  parser.add_argument('-v', '--version', action='store_true')
-  parser.add_argument('aname', nargs='?', metavar='appname', help='start syncing with app name (-a)')
-  args = parser.parse_args()
-  
   if args.list:
     if any(apps):
       print ''
@@ -103,6 +84,45 @@ def samef(l):
 
 def spc(num): 
   return ''.join([' ']*num) if num else ''
+
+def err_nolist():
+  print "App list not found in '%s'. Add a valid list or specify config file (-f, --conf) " % (conf)
+
+
+# parse config file
+
+plist = ConfigParser()
+plist.read(conf)
+
+
+# check the list section
+
+if plist.has_section('list'):
+  a = {}
+  for key, val in plist.items('list'):
+    vals = val.replace("\\ ", "%20")
+    vals = ' '.join(vals.split()).split(' ')
+    vals = [v.replace("%20", ' ') for v in vals]
+    a[key] = [vals[0], vals[1]]
+else:
+  err_nolist()
+  exit()
+
+apps = OrderedDict(sorted(a.items()))
+
+
+# global additional rsync options
+# - excludes .git/ & .DS_Store by default, add more to the conf file
+# - to override, edit the conf file, or use the (-s) or (-c) option and run rsync directly
+
+eopt = ''
+setexcl = plist.get('settings', 'exclude')
+if setexcl:
+  paths = setexcl.replace("\\ ", "%20")
+  paths = ' '.join(paths.split()).split(' ')
+  paths = [p.replace("%20", ' ') for p in paths]
+  eopt = ' '.join(['--exclude=' + p for p in paths])
+
 
 
 if __name__ == '__main__':
