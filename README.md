@@ -32,19 +32,6 @@ Normal sync (-a):
     psync railsapp
     psync myfile
 
-Specify a custom file path for config file:
-
-    psync -f /path/to/psync.ini
-    
-or
-    
-    psync --conf=/path/to/psync.ini
-
-> By default, the script will look for the config file in your current working directory. You can set a different config path through the above option or by editing the code. The latter option isn't reccomended.
-> 
-> Additionally, you can set the custom file path if you create an alias (e.g. `push`) to use the shorter command in your normal workflow. Read the **Alias** section at the end for more details.
-
-
 Sync but delete extraneous files (-d):
 
     psync -d railsapp
@@ -65,6 +52,19 @@ The output should be something like this:
     myfile      /home/myfile.php    user@1.1.1.1:/home/myfile.php
     railsapp    /home/me/railsapp/  user@remote.com:/home/railsapp/
     
+### Config file option
+
+To specify a custom file path for the config file, use the `-f` or `--conf` option:
+
+    psync -f /path/to/psync.ini railsapp
+    
+or
+    
+    psync --conf=/path/to/psync.ini railsapp
+
+> By default, the script looks for the config file in your current working directory. The above option will override the default.
+
+
 ### Alias with `psync` or `push`
 
 To acess psync.py with `psync` add the following to `.bashrc` or `.profile` on Mac:
