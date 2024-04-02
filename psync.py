@@ -95,11 +95,14 @@ def err_nolist():
 plist = ConfigParser()
 plist.read(conf)
 
-# check the 'replace' section
+# check the [replace] section & prepare it
+
 rep_sec = False
 if plist.has_section('replace'):
   rep_sec = True
-# check the 'list' section
+
+
+# check the [list] section
 
 if plist.has_section('list'):
   a = {}
@@ -107,7 +110,7 @@ if plist.has_section('list'):
     vals = val.replace("\\ ", "%20")
     vals = ' '.join(vals.split()).split(' ')
     vals = [v.replace("%20", ' ') for v in vals]
-    # 'replace' section: if there are a list of replacements make substitutions
+    # [replace] section: if there are a list of replacements -> make substitutions
     if rep_sec:
       for rk, rv in plist.items('replace'):
         rk = re.escape(rk)
