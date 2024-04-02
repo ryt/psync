@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
 __author__  = 'Ray, github.com/ryt'
-__version__ = 'psync version 1.1.2'
+__version__ = 'psync version 1.1.3'
 __license__ = 'MIT'
 
+import re
 import sys
 from argparse import ArgumentParser
 from configparser import ConfigParser
@@ -94,8 +95,11 @@ def err_nolist():
 plist = ConfigParser()
 plist.read(conf)
 
-
-# check the list section
+# check the 'replace' section
+rep_sec = False
+if plist.has_section('replace'):
+  rep_sec = True
+# check the 'list' section
 
 if plist.has_section('list'):
   a = {}
@@ -103,7 +107,14 @@ if plist.has_section('list'):
     vals = val.replace("\\ ", "%20")
     vals = ' '.join(vals.split()).split(' ')
     vals = [v.replace("%20", ' ') for v in vals]
-    a[key] = [vals[0], vals[1]]
+    # 'replace' section: if there are a list of replacements make substitutions
+    if rep_sec:
+      for rk, rv in plist.items('replace'):
+        rk = re.escape(rk)
+        rv = re.escape(rv)
+        a[key] = [re.sub(rk, rv, vals[0]), re.sub(rk, rv, vals[1])]
+    else:
+      a[key] = [vals[0], vals[1]]
 else:
   err_nolist()
   exit()

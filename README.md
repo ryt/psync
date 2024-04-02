@@ -5,26 +5,6 @@ Psync (inspired by grsync) makes it easy to use rsync with multiple apps/sites.
 Just edit  the config file (`psync.ini`) and add your local and remote paths. 
 Give each app or project a short name and you're done.
 
-Setup
-==
-> In the examples below, the command used is psync. You can create an alias, for example `push`, if you want to do that. If you don't know how, read to the end.
-
-Add your local and remote paths by editing `psync.ini`:
-
-```ini
-[list]
-railsapp = /home/me/railsapp/    user@remote.com:/home/railsapp/
-```
-
-If both your local and remote paths are identical, use the keyword `:same` in the remote value:
-
-```ini
-[list]
-myfile = /home/myfile.php   user@1.1.1.1:same
-myapp  = /home/myapp/       serverhost:same
-```
-> You can escape spaces in path names using a backslash (e.g. `my\ file`). Additionally, the conf file has a settings section where you can specify paths you'd like to exclude. The default settings will exclude `.git/` and `.DS_Store`.
-
 Usage
 ==
 Normal sync (-a):
@@ -51,7 +31,53 @@ The output should be something like this:
     myapp       /home/myapp/        serverhost:/home/myapp/
     myfile      /home/myfile.php    user@1.1.1.1:/home/myfile.php
     railsapp    /home/me/railsapp/  user@remote.com:/home/railsapp/
-    
+
+Setup
+==
+> In the examples below, the command used is psync. You can create an alias, for example `push`, if you want to do that. If you don't know how, read to the end.
+
+Add your local and remote paths by editing `psync.ini`:
+
+```ini
+[list]
+railsapp = /home/me/railsapp/    user@remote.com:/home/railsapp/
+```
+
+If both your local and remote paths are identical, use the keyword `:same` in the remote value:
+
+```ini
+[list]
+myfile = /home/myfile.php   user@1.1.1.1:same
+myapp  = /home/myapp/       serverhost:same
+```
+> You can escape spaces in path names using a backslash (e.g. `my\ file`).
+
+#### Substitutions
+
+You can add substitutions and replacements to the path names using the `[replace]` section. Use the *key* for your pattern and *value* for your replacement.
+
+```ini
+[replace]
+$longpath = /home/clients/ray/projects/2024/01/long/path/apps
+$another  = /home/another/substitution/projects
+
+# use the above keys instead of long path names in the list below:
+
+[list]
+djlite = $longpath/django-lite     user@1.1.1.1:/srv/projects/django-lite
+myapp  = $another/myfile.php       serverhost:same
+```
+
+#### Excludes
+
+You can exclude certain directories and files by using `exclude` in the `[settings]` section:
+
+```ini
+[settings]
+exclude = .git/ .DS_Store
+```
+
+
 ### Config file option
 
 To specify a custom file path for the config file, use the `-f` or `--conf` option:
