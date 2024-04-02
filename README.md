@@ -21,7 +21,7 @@ Show the rsync command and exit (-s) or (-c):
     psync -s railsapp
     psync -c railsapp
 
-List all the apps (or files) that you've added (-l) or (--list):
+List all the apps (or files) that you've added alphabetically (-l) or (--list):
 
     psync -l
     psync --list
