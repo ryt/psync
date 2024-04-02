@@ -7,30 +7,39 @@ Give each app or project a short name and you're done.
 
 Usage
 ==
-Normal sync (-a):
+Normal sync `-a`:
 
-    psync railsapp
-    psync myfile
+```console
+psync railsapp
+psync myfile
+```
 
-Sync but delete extraneous files (-d):
+Sync but delete extraneous files `-d`:
 
-    psync -d railsapp
+```console
+psync railsapp -d
+```
     
-Show the rsync command and exit (-s) or (-c):
+Show the rsync command and exit `-s` or `-c`:
 
-    psync -s railsapp
-    psync -c railsapp
+```console
+psync railsapp -s
+psync railsapp -c
+```
 
-List all the apps (or files) that you've added alphabetically (-l) or (--list):
+List all the apps (or files) that you've added alphabetically `-l` or `--list`:
 
-    psync -l
-    psync --list
-    
+```console
+psync (-l|--list)
+```
+
 The output should be something like this:
-    
-    myapp       /home/myapp/        serverhost:/home/myapp/
-    myfile      /home/myfile.php    user@1.1.1.1:/home/myfile.php
-    railsapp    /home/me/railsapp/  user@remote.com:/home/railsapp/
+
+```ini
+myapp       /home/myapp/        serverhost:/home/myapp/
+myfile      /home/myfile.php    user@1.1.1.1:/home/myfile.php
+railsapp    /home/me/railsapp/  user@remote.com:/home/railsapp/
+```
 
 Setup
 ==
@@ -108,3 +117,9 @@ To specify a custom config file path with `push` use the `-f` or `--conf` option
     alias push='/path/to/psync.py --conf=/path/to/psync.ini'
 
 > Final note: if you want to specify additional rsync options when you run psync, run the show command and exit with (-s) or (-c) and add your options accordingly when running the rsync command.
+
+
+#### Notes
+The current version of psync has been tested successfully on Python 3.8 and above.
+
+<sub>Copyright &copy; 2024 Ray Mentose.</sub>
