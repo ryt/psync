@@ -91,11 +91,15 @@ exclude = .git/ .DS_Store
 
 To specify a custom file path for the config file, use the `-f` or `--conf` option:
 
-    psync -f /path/to/psync.ini railsapp
-    
+```console
+psync -f /path/to/psync.ini railsapp
+```
+
 or
-    
-    psync --conf=/path/to/psync.ini railsapp
+
+```console
+psync --conf=/path/to/psync.ini railsapp
+```
 
 > By default, the script looks for the config file in your current working directory. The above option will override the default.
 
@@ -104,22 +108,28 @@ or
 
 To acess psync.py with `psync` add the following to `.bashrc` or `.profile` on Mac:
 
-    alias psync='/path/to/psync.py'
+```bash
+alias psync='/path/to/psync.py'
+```
 
 To access it with `push` simply name the alias `push` :)
 
-    alias push='/path/to/psync.py'
+```bash
+alias push='/path/to/psync.py'
+```
 
 > Note: you may encounter errors if you use the short `~/path` versions of files or directories in your alias. To prevent any errors, use the full path starting with `/path`.
     
 To specify a custom config file path with `push` use the `-f` or `--conf` option:
 
-    alias push='/path/to/psync.py --conf=/path/to/psync.ini'
+```bash
+alias push='/path/to/psync.py --conf=/path/to/psync.ini'
+```
 
-> Final note: if you want to specify additional rsync options when you run psync, run the show command and exit with (-s) or (-c) and add your options accordingly when running the rsync command.
+> Final note: if you want to specify additional rsync options when you run psync, run the show command and exit with `-s` or `-c` and add your options accordingly when running the rsync command.
 
 
 #### Notes
-The current version of psync has been tested successfully on Python 3.8 and above.
+The current version of psync has been tested successfully on Python 3.8 and above. If you have older versions of Python, you may need to make slight modifications to the script to make it compatible.
 
 <sub>Copyright &copy; 2024 Ray Mentose.</sub>
