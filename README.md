@@ -54,7 +54,7 @@ myapp  = /home/myapp/       serverhost:same
 
 #### Substitutions
 
-You can add substitutions and replacements to the path names using the `[replace]` section. Use the *key* for your pattern and *value* for your replacement.
+You can make substitutions to the list of path names by using the `[replace]` section. Use the *key* for your pattern and *value* for your replacement. The patterns will be parsed as strings and not regular expressions. If you'd like, you can use any symbol (e.g. `$`) to differentiate the replacement keys.
 
 ```ini
 [replace]
