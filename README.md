@@ -58,14 +58,14 @@ You can make substitutions to the list of path names by using the `[replace]` se
 
 ```ini
 [replace]
-$longpath = /home/clients/ray/projects/2024/01/long/path/apps
-$another  = /home/another/substitution/projects
+$longpath = /home/clients/ray/projects/2024-01-01/long/path/to/apps
+$another  = /home/another/substitution/for/projects
 
 # use the above keys instead of long path names in the list below:
 
 [list]
 djlite = $longpath/django-lite     user@1.1.1.1:/srv/projects/django-lite
-myapp  = $another/myfile.php       serverhost:same
+myapp  = $another/myfile.php       serverhost:/var/www/projects/myfile.php
 ```
 
 #### Excludes
