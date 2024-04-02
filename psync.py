@@ -112,10 +112,14 @@ if plist.has_section('list'):
     vals = [v.replace("%20", ' ') for v in vals]
     # [replace] section: if there are a list of replacements -> make substitutions
     if rep_sec:
+      rvals0 = vals[0]
+      rvals1 = vals[1]
       for rk, rv in plist.items('replace'):
         rk = re.escape(rk)
         rv = re.escape(rv)
-        a[key] = [re.sub(rk, rv, vals[0]), re.sub(rk, rv, vals[1])]
+        rvals0 = re.sub(rk, rv, rvals0)
+        rvals1 = re.sub(rk, rv, rvals1)
+      a[key] = [rvals0, rvals1]
     else:
       a[key] = [vals[0], vals[1]]
 else:
