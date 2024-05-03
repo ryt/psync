@@ -1,0 +1,6 @@
+# Python
+*__pycache__*
+*.pyc
+
+# General
+*.DS_Store
