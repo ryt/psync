@@ -59,8 +59,11 @@ def app_run(args):
     cmd = ['rsync', opt, eopt, dir1, dir2]
     if args.d:
       cmd = ['rsync', opt, '--delete', eopt, dir1, dir2]
+    # flatten the cmd (list) / after adding --exclude (eopt)
+    cmd = [i for s in cmd for i in (s if isinstance(s, list) else [s])]
     if args.s or args.c:
       print(' '.join(cmd))
+      print(cmd)
       exit()
     call(cmd)
   else:
@@ -133,13 +136,13 @@ apps = OrderedDict(sorted(a.items()))
 # - excludes .git/ & .DS_Store by default, add more to the conf file
 # - to override, edit the conf file, or use the (-s) or (-c) option and run rsync directly
 
-eopt = ''
+eopt = []
 setexcl = plist.get('settings', 'exclude')
 if setexcl:
   paths = setexcl.replace("\\ ", "%20")
   paths = ' '.join(paths.split()).split(' ')
   paths = [p.replace("%20", ' ') for p in paths]
-  eopt = ' '.join(['--exclude=' + p for p in paths])
+  eopt  = ['--exclude=' + p for p in paths]
 
 
 
