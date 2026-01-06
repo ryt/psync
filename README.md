@@ -1,12 +1,12 @@
-Psync
-==
+## Psync
+
 Psync (inspired by grsync) makes it easy to use rsync with multiple apps/sites. 
 
 Just edit  the config file (`psync.ini`) and add your local and remote paths. 
 Give each app or project a short name and you're done.
 
-Usage
-==
+### Usage
+
 Normal sync `-a`:
 
 ```console
@@ -132,4 +132,3 @@ alias push='/path/to/psync.py --conf=/path/to/psync.ini'
 #### Notes
 The current version of psync has been tested successfully on Python 3.8 and above. If you have older versions of Python, you may need to make slight modifications to the script to make it compatible.
 
-<sub>Copyright &copy; 2024 Ray Mentose.</sub>

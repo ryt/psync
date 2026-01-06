@@ -16,6 +16,7 @@ parser.add_argument('-a', '--app', help='start syncing with app name', metavar='
 parser.add_argument('-l', '--list', help='list all apps and directories', action='store_true')
 parser.add_argument('-o', help='override new files on the reciever, rsync !u', action='store_true')
 parser.add_argument('-d', help='delete extra files on destination, rsync --delete', action='store_true')
+parser.add_argument('-z', help='fuz[z]y option: rsync fuzzy option with delays, rsync --fuzzy --delay-updates --delete-delay', action='store_true')
 parser.add_argument('-s', help='show the rsync command used and exit', action='store_true')
 parser.add_argument('-c', help='show the rsync command used and exit', action='store_true')
 parser.add_argument('-v', '--version', action='store_true')
@@ -59,6 +60,8 @@ def app_run(args):
     cmd = ['rsync', opt, eopt, dir1, dir2]
     if args.d:
       cmd = ['rsync', opt, '--delete', eopt, dir1, dir2]
+    if args.z:
+      cmd = ['rsync', opt, '--fuzzy', '--delay-updates', eopt, dir1, dir2]
     # flatten the cmd (list) / after adding --exclude (eopt)
     cmd = [i for s in cmd for i in (s if isinstance(s, list) else [s])]
     if args.s or args.c:
