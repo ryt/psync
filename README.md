@@ -1,11 +1,11 @@
-## Psync
+# Psync
 
 Psync (inspired by grsync) makes it easy to use rsync with multiple apps/sites. 
 
 Just edit  the config file (`psync.ini`) and add your local and remote paths. 
 Give each app or project a short name and you're done.
 
-### Usage
+## Usage
 
 Normal sync `-a`:
 
@@ -41,8 +41,8 @@ myfile      /home/myfile.php    user@1.1.1.1:/home/myfile.php
 railsapp    /home/me/railsapp/  user@remote.com:/home/railsapp/
 ```
 
-Setup
-==
+## Setup
+
 > In the examples below, the command used is psync. You can create an alias, for example `push`, if you want to do that. If you don't know how, read to the end.
 
 Add your local and remote paths by editing `psync.ini`:
@@ -131,4 +131,5 @@ alias push='/path/to/psync.py --conf=/path/to/psync.ini'
 
 #### Notes
 The current version of psync has been tested successfully on Python 3.8 and above. If you have older versions of Python, you may need to make slight modifications to the script to make it compatible.
+
 
