@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 __author__  = 'Ray, github.com/ryt'
-__version__ = 'psync version 1.1.3'
+__version__ = 'psync version 1.1.6.dev0'
 __license__ = 'MIT'
 
-import re
 import sys
 from argparse import ArgumentParser
 from configparser import ConfigParser
@@ -121,10 +120,8 @@ if plist.has_section('list'):
       rvals0 = vals[0]
       rvals1 = vals[1]
       for rk, rv in plist.items('replace'):
-        rk = re.escape(rk)
-        rv = re.escape(rv)
-        rvals0 = re.sub(rk, rv, rvals0)
-        rvals1 = re.sub(rk, rv, rvals1)
+        rvals0 = rvals0.replace(rk, rv)
+        rvals1 = rvals1.replace(rk, rv)
       a[key] = [rvals0, rvals1]
     else:
       a[key] = [vals[0], vals[1]]
