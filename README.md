@@ -130,6 +130,5 @@ alias push='/path/to/psync.py --conf=/path/to/psync.ini'
 
 
 #### Notes
-The current version of psync has been tested successfully on Python 3.8 and above. If you have older versions of Python, you may need to make slight modifications to the script to make it compatible.
-
+Supporting python versions: 3.8+
 
